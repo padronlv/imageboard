@@ -45,7 +45,7 @@ app.post('/upload', uploader.single('file'), s3.upload, function(req, res) {
             success: true,
             image: image
         });
-    });
+    })
 });
 
 app.get('/images/:id', (req, res ) => {
@@ -64,7 +64,7 @@ app.get('/images/:id', (req, res ) => {
 app.get('/comments/:imageid', (req, res ) => {
     db.getComments(req.params.imageid)
         .then(comments => {
-            console.log(comments);
+            // console.log(comments);
             res.json ({
                 success: true,
                 comments: comments

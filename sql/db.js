@@ -9,7 +9,7 @@ if(process.env.DATABASE_URL) {
 
 
 module.exports.getImages = function () {
-    return db.query(`SELECT * FROM images ORDER BY id DESC;`)
+    return db.query(`SELECT * FROM images ORDER BY id DESC LIMIT 9;`)
         .then(results => {
             // console.log(results.rows);
             return(results.rows);
@@ -18,9 +18,11 @@ module.exports.getImages = function () {
         });
 };
 
+
+
 module.exports.getComments = function (imageId) {
     const q = `
-    SELECT * FROM comments WHERE image_id = $1 ORDER BY id DESC 
+    SELECT * FROM comments WHERE image_id = $1 ORDER BY id DESC
     `;
     const params = [imageId];
     return db.query(q, params)

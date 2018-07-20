@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="divTitle">
-        <h1>Pictures</h1>
+        Pictures and more
     </div>
     <div id="main">
         <image-modal v-if="imageId" :imageid="imageId" @nullifyid="closeModal"></image-modal>
@@ -52,13 +52,17 @@
     <script id='my-template' type="text/x-template">
         <div id='image-modal'>
 
-            <p @click="closeImage()">x</p>
             <div class="gridArea">
-                <div class="imageBoxBig">
-                    <img class="imageUploaded" v-bind:src="image.url" alt="Something went wrong with this image">
-                    <div class="imageTitle">
-                        {{ image.title }}
+
+                <div class="imageAndClosing">
+                    <p class="closingTag" @click="closeImage()">x</p>
+                    <div class="imageBoxBig">
+                        <img class="imageUploaded" v-bind:src="image.url" alt="Something went wrong with this image">
+                        <div class="imageTitle">
+                            {{ image.title }}
+                        </div>
                     </div>
+
                 </div>
 
                 <div class="formComments">
@@ -82,11 +86,11 @@
                     </div>
                 </div>
 
+                </div>
 
             </div>
         </script>
 
-            </div>
 
 
     <script src="/js/vue.js"></script>

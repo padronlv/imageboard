@@ -1,24 +1,26 @@
 * {
     box-sizing:border-box;
     font-family: Calibri;
-    color: red;
+    color: black;
 }
 
 body {
-    background-color: #ABB2B9;
+    background-color: #D5D8DC;
     margin: 0;
 }
 
 .imageBoard {
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax(360px, 1fr));
-    grid-gap: 25px;
+    grid-gap: 40px;
+    justify-content: center;
+    justify-items: center;
 
 }
 
 .imageBox {
     background-color: #808B96;
-    justify-self: center;
+
     height: 360px;
     width: 360px;
     border: 3px solid white;
@@ -29,17 +31,34 @@ body {
 }
 .imageBoxBig{
     background-color: #808B96;
-    justify-self: center;
     height: 460px;
     width: 460px;
     border: 3px solid white;
     border-radius: 10px;
     text-align: center;
     /* overflow: hidden; */
-    grid-column: 1 / span 1;
-    grid-row: 1 / span 2;
+
 }
 
+.imageAndClosing {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 2;
+    text-align: center;
+
+}
+
+.closingTag {
+    font-size: 30px;
+    background-color: black;
+    color: red;
+    width: 50px;
+    border-radius: 3px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+}
+.closingTag:hover {
+    transform: scale(1.05);
+}
 
 .imageBox:hover {
     transform: scale(1.03);
@@ -121,6 +140,7 @@ input {
 
 .fieldEdit {
     display: flex;
+    justify-content: center;
 }
 
 .selectImage{
@@ -135,6 +155,9 @@ input {
 
 .divTitle {
     text-align: center;
+    background-color: black;
+    color: white;
+    font-size: 50px;
 }
 
 #image-modal {
@@ -146,7 +169,8 @@ input {
     bottom: 0px;
     left: 0px;
     right: 0px;
-    background-color: white;
+    background-color: #D5D8DC;
+    overflow-y: scroll;
 }
 .gridArea {
     display: grid;

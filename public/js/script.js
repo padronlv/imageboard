@@ -2,7 +2,7 @@
     Vue.component('image-modal', {
         data: function () {
             return {
-                image: 'test',
+                image: '',
                 title: '',
                 usernameComment: '',
                 comment: '',
@@ -21,28 +21,7 @@
                     // console.log(self.image);
                     axios.get(/comments/ + self.imageid)
                         .then(function(res) {
-                            console.log(res.data.comments);
-                            self.comments = res.data.comments;
-                            // console.log(self.image);
-                        })
-                        .catch(err => {
-                            console.log(err)
-                        });
-                })
-                .catch(err => {
-                    console.log(err)
-                });
-        },
-        watch: function () {
-            var self = this;
-            axios.get('/images/' + this.imageid)
-                .then(function(res) {
-                    // console.log(res.data.image);
-                    self.image = res.data.image;
-                    // console.log(self.image);
-                    axios.get(/comments/ + self.imageid)
-                        .then(function(res) {
-                            console.log(res.data.comments);
+                            // console.log(res.data.comments);
                             self.comments = res.data.comments;
                             // console.log(self.image);
                         })
@@ -53,7 +32,31 @@
                 .catch(err => {
                     console.log(err);
                 });
+        },
+        watch: {
+            imageid: function () {
+                console.log("is working");
+                var self = this;
+                axios.get('/images/' + this.imageid)
+                    .then(function(res) {
+                        // console.log(res.data.image);
+                        self.image = res.data.image;
+                        // console.log(self.image);
+                        axios.get(/comments/ + self.imageid)
+                            .then(function(res) {
+                            // console.log(res.data.comments);
+                                self.comments = res.data.comments;
+                            // console.log(self.image);
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
 
+            }
         },
         methods: {
             closeImage: function () {
@@ -111,20 +114,22 @@
             },
             clickImage: function(id) {
                 this.imageId = id;
+                location.hash = this.imageId;
                 // console.log(this.imageId);
             },
             closeModal: function(arg) {
                 this.imageId = arg;
+                location.hash = '';
                 // console.log(this.imageId)
             }
         },
         mounted: function () {
 
             addEventListener('hashchange', function () {
-                this.imageId = location.hash.slice(1);
-                if (isNaN(this.imageId)) {
-                    this.imageId = null;
-                    location.hash = ''; 
+                app.imageId = location.hash.slice(1);
+                if (isNaN(app.imageId)) {
+                    app.imageId = null;
+                    location.hash = '';
                 }
             });
             // console.log("mounted");
