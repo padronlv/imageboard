@@ -45,7 +45,7 @@ app.post('/upload', uploader.single('file'), s3.upload, function(req, res) {
             success: true,
             image: image
         });
-    })
+    });
 });
 
 app.get('/images/:id', (req, res ) => {
@@ -77,6 +77,17 @@ app.get('/comments/:imageid', (req, res ) => {
 
 app.get('/images', (req, res) => {
     db.getImages()
+        .then(images => {
+            // console.log(images);
+            res.json(images);
+        }).catch(err => {
+            console.log(err);
+        });
+});
+
+app.get('/:lastimage', (req, res) => {
+    // console.log("get last image");
+    db.getMoreImages(req.params.lastimage)
         .then(images => {
             // console.log(images);
             res.json(images);

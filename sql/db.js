@@ -8,8 +8,19 @@ if(process.env.DATABASE_URL) {
 }
 
 
+// module.exports.getImages = function () {
+//     return db.query(`SELECT * FROM images ORDER BY id DESC LIMIT 9;`)
+//         .then(results => {
+//             // console.log(results.rows);
+//             return(results.rows);
+//         }).catch(err => {
+//             console.log(err);
+//         });
+// };
 module.exports.getImages = function () {
-    return db.query(`SELECT * FROM images ORDER BY id DESC LIMIT 9;`)
+    return db.query(`SELECT *, (
+        SELECT id FROM images ORDER BY id ASC LIMIT 1
+    ) as id_first_image FROM images ORDER BY id DESC LIMIT 6;`)
         .then(results => {
             // console.log(results.rows);
             return(results.rows);
@@ -18,6 +29,21 @@ module.exports.getImages = function () {
         });
 };
 
+module.exports.getMoreImages = function (lastImage) {
+    const q = `
+        SELECT *, (
+            SELECT id FROM images ORDER BY id ASC LIMIT 1
+        ) as id_first_image FROM images WHERE id < $1 ORDER BY id DESC LIMIT 6
+    `;
+    const params = [lastImage];
+    return db.query(q, params)
+        .then(results => {
+            // console.log(results.rows);
+            return(results.rows);
+        }).catch(err => {
+            console.log(err);
+        });
+};
 
 
 module.exports.getComments = function (imageId) {
@@ -35,9 +61,14 @@ module.exports.getComments = function (imageId) {
 };
 
 module.exports.getAnImage = function (imageId) {
-    const q = `
-    SELECT * FROM images WHERE id = $1
-    `;
+    const q =`
+    SELECT *, (
+        SELECT id FROM images WHERE id < $1 ORDER BY id DESC LIMIT 1
+    ) as right_image, (
+        SELECT id FROM images WHERE id > $1 ORDER BY id ASC LIMIT 1
+    ) as left_image
+    FROM images
+    WHERE id = $1`;
     const params = [imageId];
     return db.query(q, params)
         .then(results => {

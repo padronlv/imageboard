@@ -78,7 +78,7 @@
                     }
                 });
 
-            },
+            }
         }
     });
     var app = new Vue({
@@ -89,13 +89,15 @@
             desc: '',
             title: '',
             imageFile: '',
-            imageId: location.hash.slice(1)
+            imageId: location.hash.slice(1),
+            lastImage: 0,
+            idFirstImage: 0
         },
         methods: {
             imageSelected: function(e) {
                 this.imageFile = e.target.files[0];
                 // console.log(this.imageVal);
-                console.log(this.imageFile);
+                console.log(this.imageFile.name);
             },
             upload: function() {
                 console.log(this.imageFile);
@@ -121,6 +123,18 @@
                 this.imageId = arg;
                 location.hash = '';
                 // console.log(this.imageId)
+            },
+            moreImages: function() {
+                axios.get('/' + app.lastImage)
+                    .then(function(res) {
+                        console.log(res.data);
+                        for (var i = 0; i < res.data.length; i++) {
+                            app.images.push(res.data[i]);
+                        }
+                        app.lastImage = app.images[app.images.length - 1].id;
+                        // console.log(app.images)
+                        // app. = res.data[0].last_image;
+                    });
             }
         },
         mounted: function () {
@@ -133,9 +147,11 @@
                 }
             });
             // console.log("mounted");
-            axios.get('/images')
+            axios.get('/images/')
                 .then(function(res) {
                     app.images = res.data;
+                    app.lastImage = app.images[app.images.length - 1].id;
+                    app.idFirstImage = app.images[0].id_first_image;
                 });
         }
     });

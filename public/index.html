@@ -17,25 +17,21 @@
             <div class="fieldEdit">
                 <label class="selectImage"  for="file-field"><h3 class="param">Image</h3></label>
                     <!-- <p class="inputImitation" v-if="imageFile.name.length > 0">{{ imageFile.name }}</p> -->
-                    <p class="inputImitation"></p>
+                    <div class="inputImitation">{{ imageFile.name }}</div>
             </div>
             <div class="fieldEdit">
                 <h3 class="param">Title</h3>
                 <input type="text" name="title" v-model="title" value="" placeholder="Title">
-
             </div>
             <div class="fieldEdit">
                 <h3 class="param">Description</h3>
                 <input type="text" name="desc" v-model="desc" value="" placeholder="Description">
-
             </div>
             <div class="fieldEdit">
                 <h3 class="param">Username</h3>
                 <input type="text" name="username" v-model="username" value="" placeholder="Username">
-
             </div>
             <div class="divButton">
-
                 <button @click="upload()" class="upload">upload!</button>
             </div>
 
@@ -48,6 +44,7 @@
                 </div>
             </div>
         </div>
+        <button v-if='lastImage != idFirstImage' @click="moreImages()" class="upload">More Images</button>
     </div>
     <script id='my-template' type="text/x-template">
         <div id='image-modal'>
@@ -64,7 +61,6 @@
                     </div>
 
                 </div>
-
                 <div class="formComments">
                     <div class="fieldEdit">
                         <h3 class="param">Username</h3>
@@ -85,14 +81,14 @@
                         <p class="commentUploaded" v-bind:key="comment.id">{{ comment.comment}}</p>
                     </div>
                 </div>
-
+                <div class="miniMenu">
+                    <a class="leftArrow" :href='"/#" + image.left_image'><</a>
+                    <div class="ImageTitleBig">{{ image.title }}</div>
+                    <a class="rightArrow" :href='"/#" + image.right_image'>></a>
                 </div>
-
             </div>
-        </script>
-
-
-
+        </div>
+    </script>
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
     <script src="/js/script.js"></script>

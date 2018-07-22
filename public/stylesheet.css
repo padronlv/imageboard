@@ -1,7 +1,6 @@
 * {
     box-sizing:border-box;
     font-family: Calibri;
-    color: black;
 }
 
 body {
@@ -42,7 +41,7 @@ body {
 
 .imageAndClosing {
     grid-column: 1 / span 1;
-    grid-row: 1 / span 2;
+    grid-row: 1 / span 4;
     text-align: center;
 
 }
@@ -80,7 +79,7 @@ body {
 }
 
 #file-field {
-    /* display: none; */
+    display: none;
 }
 
 input {
@@ -104,8 +103,10 @@ input {
     height: 50px;
     font-size: 20px;
     background-color: #808B96;
+    display: flex;
+    align-items: center;
 }
-#808B96
+
 
 .imageInfo {
     display:flex;
@@ -145,13 +146,21 @@ input {
 
 .selectImage{
     background-color: #212F3D;
+    color: white;
     cursor: pointer;
 
 }
-.divSelectImage {
+
+.selectImage:hover {
+    background-color: white;
+    color: black;
+}
+
+
+/* .divSelectImage {
     text-align: center;
     margin-bottom: 10px;
-}
+} */
 
 .divTitle {
     text-align: center;
@@ -169,17 +178,20 @@ input {
     bottom: 0px;
     left: 0px;
     right: 0px;
-    background-color: #D5D8DC;
-    overflow-y: scroll;
+    background-color: rgb(0,0,0,0.7);
+
 }
 .gridArea {
     display: grid;
     justify-items: center;
     align-items: center;;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 3fr;
-    height: 80%;
-    width: 80%;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    height: 85%;
+    width: 85%;
+    background-color: #D5D8DC;
+    border-radius: 20px;
+    overflow-y: auto;
 
 }
 
@@ -189,13 +201,23 @@ input {
 
 .commentBox {
     background-color: #808B96;
-    grid-column: 2 / span 1;
-    grid-row: 2 / span 1;
     width: 524px;
     border-radius: 3px;
 }
 
 .formComments {
     grid-column: 2 / span 1;
-    grid-row: 1 / span 1;
+    grid-row: 1 / span 2;
+}
+
+.commentBoard {
+    grid-column: 2 / span 1;
+    grid-row: 3 / span 3;
+    align-self: start;
+}
+
+.miniMenu {
+    grid-column: 1 / span 2;
+    grid-row: 5 / span 1;
+    display: flex;
 }
