@@ -56,7 +56,8 @@ body {
     padding-bottom: 10px;
 }
 .closingTag:hover {
-    transform: scale(1.05);
+    transform: scale(1.10);
+    cursor: pointer;
 }
 
 .imageBox:hover {
@@ -187,8 +188,8 @@ input {
     align-items: center;;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    height: 85%;
-    width: 85%;
+    height: 92%;
+    width: 92%;
     background-color: #D5D8DC;
     border-radius: 20px;
     overflow-y: auto;
@@ -212,7 +213,7 @@ input {
 
 .commentBoard {
     grid-column: 2 / span 1;
-    grid-row: 3 / span 3;
+    grid-row: 3 / span 2;
     align-self: start;
 }
 
@@ -220,4 +221,19 @@ input {
     grid-column: 1 / span 2;
     grid-row: 5 / span 1;
     display: flex;
+}
+
+.leftArrow {
+    font-size: 48px;
+     text-decoration: none;
+}
+
+.rightArrow {
+    font-size: 48px;
+     text-decoration: none;
+}
+
+.ImageTitleBig {
+    font-size: 48px;
+
 }
